@@ -6,22 +6,13 @@
         <div class="card_register">
           <div class="card">
             <div class="card-body text-center">
-              <form #formRegister="ngForm" (ngSubmit)="onRegister(formRegister)">
+              <form #formRegister="ngForm" (ngSubmit)="onAddUser()">
                 <h1 class="h3 mb-3 font-weight-normal">Register</h1>
                 <div class="alert alert-danger" role="alert" *ngIf="isError">
                   {{msgError}}
                 </div>
                 <div class="form-group">
-                  <input type="text" #name="ngModel" name="name" class="form-control" placeholder="Name" [(ngModel)]="user.name" required minlength="4"
-                    maxlength="15">
-                </div>
-
-                <div class="alert alert-danger" role="alert" *ngIf="name.touched && !name.valid">
-                  <div *ngIf="name.errors.required">Name is required</div>
-                  <div *ngIf="name.errors.minlength">Name must be at least 4 characters</div>
-                </div>
-                <div class="form-group">
-                  <input type="email" #email="ngModel" name="email" class="form-control" placeholder="Email" [(ngModel)]="user.email" required
+                  <input type="email" name="email" class="form-control" placeholder="Email" [(ngModel)]="this.email" required
                     minlength="8">
                 </div>
                 <div class="alert alert-danger" role="alert" *ngIf="email.touched && !email.valid">
@@ -29,7 +20,7 @@
                   <div *ngIf="email.errors.minlength">Email must be at least 8 characters</div>
                 </div>
                 <div class="form-group">
-                  <input type="password" #password="ngModel" name="password" class="form-control" placeholder="Password" [(ngModel)]="user.password"
+                  <input type="password" name="password" class="form-control" placeholder="Password" [(ngModel)]="this.password"
                     required minlength="5" maxlength="10">
                 </div>
                 <div class="alert alert-danger" role="alert" *ngIf="password.touched && !password.valid">
@@ -40,6 +31,21 @@
                 <div class="form-group">
                   <a routerLink="/user/login" class="form-control login-user">Do you have account?</a>
                 </div>
+
+                <div class="form-group">
+                  
+                  <a href="#" class="btn btn-block btn-social btn-facebook">
+                    <span class="fa fa-facebook"></span>
+                    FACEBOOK
+                  </a>
+
+                  <a href="#" class="btn btn-block btn-social btn-google" (click)="onLoginGoogle()">
+                      <span class="fa fa-google"></span>
+                      GOOGLE
+                  </a>
+
+                </div>
+
               </form>
             </div>
           </div>

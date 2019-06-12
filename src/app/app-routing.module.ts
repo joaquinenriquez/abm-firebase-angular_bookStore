@@ -10,12 +10,13 @@ import { ProfileComponent } from './components/usuarios/profile/profile.componen
 import { Page404Component } from './components/page404/page404.component';
 
 const routes: Routes = [
+
   { path: '', component: HomeComponent },
   { path: 'offers', component: OffersComponent},
-  { path: 'book/id', component: DetallesLibroComponent},
-  { path: 'admin/listado-libros', component: ListadoLibrosComponent},
-  { path: 'usuario/login', component: LoginComponent},
-  { path: 'usuario/registrar', component: RegisterComponent},
+  { path: 'book:/id', component: DetallesLibroComponent},
+  { path: 'admin/lists-books', component: ListadoLibrosComponent},
+  { path: 'user/login', component: LoginComponent},
+  { path: 'user/register', component: RegisterComponent},
   { path: 'usuario/profile', component: ProfileComponent},
   { path: '**', component: Page404Component }
 
