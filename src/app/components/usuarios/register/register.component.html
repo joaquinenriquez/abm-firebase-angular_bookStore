@@ -19,6 +19,9 @@
                   <div *ngIf="email.errors.required">Email is required</div>
                   <div *ngIf="email.errors.minlength">Email must be at least 8 characters</div>
                 </div>
+
+                <input type="file" accept="image/*" (change)="onUpload($event)">
+
                 <div class="form-group">
                   <input type="password" name="password" class="form-control" placeholder="Password" [(ngModel)]="this.password"
                     required minlength="5" maxlength="10">
@@ -33,7 +36,7 @@
                 </div>
 
                 <div class="form-group">
-                  
+
                   <a href="#" class="btn btn-block btn-social btn-facebook">
                     <span class="fa fa-facebook"></span>
                     FACEBOOK

@@ -11,18 +11,23 @@ export class RegisterComponent implements OnInit {
 
   public email: string = '';
   public password: string = '';
+  public isError: boolean = false;
 
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
   }
 
-  onAddUser(){
+  onAddUser() {
     this.authService.registerUser(this.email, this.password)
     .then((res) => {
       this.router.navigate(['admin/list-books']);
     })
     .catch(err => console.log('err', err.message));
+  }
+
+  onUpload(e) {
+    console.log('err', e);
   }
 
 }
