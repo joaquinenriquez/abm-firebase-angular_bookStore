@@ -1,23 +1,55 @@
-<p>
-  listado-libros works!
-</p>
+<section class="row mt-5">
+  <div class="col">
+    <button class="btn btn-primary float-right mb-3" data-toggle="modal"
+    data-target="#modalLibro">Nuevo Libro</button>
+    {{this.isAdmin}}
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scpoe="col">#</th>
+          <th scpoe="col">Titulo</th>
+          <th scpoe="col">Autor</th>
+          <th scpoe="col">Idioma</th>
+          <th scpoe="col">Precio</th>
+          <th scpoe="col">Oferta</th>
+          <th scpoe="col">&nbsp;</th>
+          <th scpoe="col">&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let unLibro of this.libros; index as i">
+          <th scope="row">{{i + 1}}</th>
+          <td>{{unLibro.titulo}}</td>
+          <td>{{unLibro.autor}}</td>
+          <td>{{unLibro.idioma}}</td>
+          <td>{{unLibro.precio}}</td>
+          <td>{{unLibro.oferta == '1'? 'Si': 'No'}}</td>
 
-<p>
-  listado-libros works!
-</p>
+          <td>
+            <button *ngIf="unLibro.userUid == userUid || isAdmin == true; else noOwner" class="btn btn-primary" (click)="onPreModificarLibro(unLibro)" data-toggle="modal"
+            data-target="#modalLibro">Modificar</button>
+          </td>
 
-<p>
-  listado-libros works!
-</p>
+          <ng-template #noOwner>
+              <button class="btn btn-primary" disabled=true>Modificar</button>
+          </ng-template>
 
-<p>
-  listado-libros works!
-</p>
 
-<p>
-  listado-libros works!
-</p>
 
-<p>
-  listado-libros works!
-</p>
+          <td>
+            <button *ngIf="isAdmin == true; else noAdmin" class="btn btn-danger" (click)="this.onDeleteLibro(unLibro.id)">Eliminar</button>
+          </td>
+
+          <ng-template #noAdmin>
+              <button class="btn btn-danger" disable=true>Eliminar</button>
+          </ng-template>
+
+
+
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+<app-modal [userUid]="userUid"></app-modal>

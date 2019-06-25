@@ -15,10 +15,12 @@ import { ProfileComponent } from './components/usuarios/profile/profile.componen
 import { RegisterComponent } from './components/usuarios/register/register.component';
 import { Page404Component } from './components/page404/page404.component';
 
-//Firebase 
+// Firebase
 import { environment } from '../environments/environment';
 import {AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 
 import { FormsModule } from '@angular/forms'
@@ -44,10 +46,12 @@ import { AngularFireAuth } from '@angular/fire/auth';
     AppRoutingModule,
     FormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    AngularFireStorageModule
   ],
   providers: [
-    AngularFireAuth
+    AngularFireAuth,
+    AngularFirestore
   ],
   bootstrap: [AppComponent]
 })

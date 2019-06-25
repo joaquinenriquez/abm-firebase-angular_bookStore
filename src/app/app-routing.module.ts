@@ -8,16 +8,17 @@ import { LoginComponent } from './components/usuarios/login/login.component';
 import { RegisterComponent } from './components/usuarios/register/register.component';
 import { ProfileComponent } from './components/usuarios/profile/profile.component';
 import { Page404Component } from './components/page404/page404.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
 
   { path: '', component: HomeComponent },
-  { path: 'offers', component: OffersComponent},
-  { path: 'book:/id', component: DetallesLibroComponent},
-  { path: 'admin/lists-books', component: ListadoLibrosComponent},
+  { path: 'offers', component: OffersComponent, canActivate: [AuthGuard] },
+  { path: 'book/:id', component: DetallesLibroComponent},
+  { path: 'admin/list-books', component: ListadoLibrosComponent, canActivate: [AuthGuard]},
   { path: 'user/login', component: LoginComponent},
   { path: 'user/register', component: RegisterComponent},
-  { path: 'usuario/profile', component: ProfileComponent},
+  { path: 'user/profile', component: ProfileComponent, canActivate: [AuthGuard]},
   { path: '**', component: Page404Component }
 
 ];

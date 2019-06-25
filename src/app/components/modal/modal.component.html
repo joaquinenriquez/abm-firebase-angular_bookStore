@@ -1,64 +1,116 @@
-<!-- Modal -->
-<div id="modalBook" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
+<div class="modal fade" id="modalLibro" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">{{!this.dataApiService.selectedBook.id ? 'New Book' : 'Update Book'}}</h5>
+        <h5 class="modal-title" id="exampleModalLabel">
+          {{!this.dataApi.libroSeleccionado.id? 'Nuevo Libro' : 'Modificar Libro'}}
+        </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form class="form-book" #formBook="ngForm" (ngSubmit)="onSaveBook(formBook)">
-          <input type="hidden" id="bookId" name="bookId" class="form-control" [(ngModel)]="this.dataApiService.selectedBook.id">
+
+        <!-- #region Formulario -->
+        <form #formLibro="ngForm" (ngSubmit)="onGuardarLibro(formLibro)" #form="ngForm">
+
+          <input type="text" name="id" [(ngModel)]="this.dataApi.libroSeleccionado.id">
+          <input type="text" name="userUid" [value]="userUid">
+
+          <!-- #region Primer Fila -->
           <div class="form-group">
-            <label for="">Titulo</label>
-            <input type="text" id="titulo" name="titulo" class="form-control" placeholder="Titulo" [(ngModel)]="this.dataApiService.selectedBook.titulo">
+            <label for="titulo" class="col-form-label">Titulo:</label>
+            <input type="text" class="form-control" name="titulo" [(ngModel)]="this.dataApi.libroSeleccionado.titulo">
           </div>
+          <!-- #endregion -->
+
+          <!-- #region Segunda Fila -->
           <div class="form-row">
+
             <div class="form-group col-md-6">
               <label for="idioma">Idioma</label>
-              <select name="idioma" id="idioma" class="form-control" [(ngModel)]="this.dataApiService.selectedBook.idioma">
-                <option value="Inglés">Inglés</option>
-                <option value="Castellano">Castellano</option>
+              <select name="idioma" class="form-control" [(ngModel)]="this.dataApi.libroSeleccionado.idioma">
+                <option value="Español">Español</option>
+                <option value="Ingles">Ingles</option>
               </select>
-
             </div>
+
+
             <div class="form-group col-md-6">
-              <label for="precio">Precio</label>
-              <input type="text" id="precio" name="precio" class="form-control" placeholder="0,00€" [(ngModel)]="this.dataApiService.selectedBook.precio">
+              <label for="Precio">Precio</label>
+              <input type="text" name="precio" class="form-control" placeholder="$0,00"
+                [(ngModel)]="this.dataApi.libroSeleccionado.precio">
             </div>
 
           </div>
+          <!-- #endregion -->
+
+
+
+          <!-- #region Tercer Fila -->
+
           <div class="form-row">
+
             <div class="form-group col-md-6">
               <label for="autor">Autor</label>
-              <input type="text" id="autor" name="autor" class="form-control" placeholder="Autor" [(ngModel)]="this.dataApiService.selectedBook.autor">
+              <input type="text" name="autor" class="form-control" placeholder="Autor"
+                [(ngModel)]="this.dataApi.libroSeleccionado.autor">
             </div>
+
             <div class="form-group col-md-6">
               <label for="oferta">Oferta</label>
-              <select name="oferta" id="oferta" class="form-control" [(ngModel)]="this.dataApiService.selectedBook.oferta">
-                <option value="1">SI</option>
-                <option value="0">NO</option>
+              <select name="oferta" class="form-control" [(ngModel)]="this.dataApi.libroSeleccionado.oferta">
+                <option value="1">Si</option>
+                <option value="0">No</option>
               </select>
             </div>
+
           </div>
+          <!-- #endregion -->
+
+          <!-- #region Cuarta Fila -->
           <div class="form-row">
+
             <div class="form-group col-md-6">
               <label for="portada">Portada</label>
-              <input type="text" id="portada" name="portada" class="form-control" placeholder="Portada" [(ngModel)]="this.dataApiService.selectedBook.portada">
+              <input type="text" name="portada" class="form-control" placeholder="Portada"
+                ([ngModel])="this.dataApi.libroSeleccionado.portada">
             </div>
+
+
             <div class="form-group col-md-6">
-              <label for="link_amazon">Link Amazon</label>
-              <input type="text" id="link_amazon" name="link_amazon" class="form-control" placeholder="Link Amazon" [(ngModel)]="this.dataApiService.selectedBook.link_amazon">
+              <label for="link">Link</label>
+              <input type="text" name="link" class="form-control" placeholder="Link"
+                [(ngModel)]="this.dataApi.libroSeleccionado.link">
             </div>
+
+
           </div>
+          <!-- #endregion -->
+
+          <!-- #region Quinta Fila -->
           <div class="form-group">
-            <label for="descripcion">Descripción</label>
-            <textarea name="descripcion" id="descripcion" class="form-control" cols="50" rows="4" [(ngModel)]="this.dataApiService.selectedBook.descripcion"></textarea>
+            <label for="descripcion" class="col-form-label">Descripcion:</label>
+            <textarea class="form-control" name="descripcion"
+              [(ngModel)]="this.dataApi.libroSeleccionado.descripcion"></textarea>
           </div>
-          <button type="submit" class="btn btn-primary float-right">Save Book</button>
+          <!-- #endregion -->
+
+          <!-- #region Sexta Fila -->
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" #btnCerrar>Cerrar</button>
+            <button type="submit" class="btn btn-primary">{{this.dataApi.libroSeleccionado.id === null ? 'Agregar' : 'Actualizar'}}</button>
+          </div>
+
+          <!-- #endregion -->
+
         </form>
+        <!-- #endregion -->
+
+      </div>
+      <div class="modal-footer">
       </div>
     </div>
   </div>
